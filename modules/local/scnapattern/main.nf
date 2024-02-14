@@ -51,7 +51,7 @@ process CALCULATE_SCNAPATTERN {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        scnapattern: \$(calculate_scnapattern.py --version |& sed '1!d ; s/calculate_scnapattern.py //')
+        scnapattern: \$(calculate_scnapattern.py --version | sed 's/calculate_scnapattern.py //')
     END_VERSIONS
     """
 }
