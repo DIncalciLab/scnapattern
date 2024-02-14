@@ -1,0 +1,11 @@
+name: scnapattern
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.10.11
+  - procps-ng
+  - pyjanitor
+  - pandas
+  - natsort
+  - pyranges
