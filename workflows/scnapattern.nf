@@ -64,15 +64,15 @@ workflow SCNAPATTERN {
                 [meta, filename]
     }
 
-    CALCULATE_SCNAPATTERN(meta, filename)
+    // CALCULATE_SCNAPATTERN(meta, filename)
 
-    CALCULATE_SCNAPATTERN.out.table
-                         .collectFile(storeDir: "${params.outdir}/summary/",
-                                      name: 'pattern_classification.seg',
-                                      keepHeader: true,
-                                      skip: 1)
+    // CALCULATE_SCNAPATTERN.out.table
+    //                      .collectFile(storeDir: "${params.outdir}/summary/",
+    //                                   name: 'pattern_classification.seg',
+    //                                   keepHeader: true,
+    //                                   skip: 1)
 
-    ch_versions = ch_versions.mix(CALCULATE_SCNAPATTERN.out.versions)
+    // ch_versions = ch_versions.mix(CALCULATE_SCNAPATTERN.out.versions)
 
     CUSTOM_DUMPSOFTWAREVERSIONS (
         ch_versions.unique().collectFile(name: 'collated_versions.yml')
