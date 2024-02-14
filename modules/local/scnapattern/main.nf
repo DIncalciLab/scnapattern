@@ -29,8 +29,8 @@ process CALCULATE_SCNAPATTERN {
         --ploidy $ploidy \\
         --file-format $format \\
         --sample-name $prefix \\
-        $args
-        $segmentfile
+        $args \\
+        $segmentfile \\
         ${prefix}_classification.txt
 
     cat <<-END_VERSIONS > versions.yml
