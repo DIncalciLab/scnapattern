@@ -240,7 +240,7 @@ def main():
     classified_sample = call_patterns(source, arm_data,
                                       options.ploidy)
 
-    classified_sample.to_csv(f"{destination}.txt", sep="\t",
+    classified_sample.to_csv(destination, sep="\t",
                              index=True)
 
 
