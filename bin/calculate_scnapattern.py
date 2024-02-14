@@ -216,7 +216,7 @@ def main():
     source = pd.read_table(options.source).clean_names()
 
     if options.sample:
-        source["sample"] = options.sample
+        source["sample"] = options.sample_name
     # Fall back to integrated sample, except for ACE that doesn't have it
     elif options.file_format == "ace":
         source["sample"] = Path(options.source).stem
