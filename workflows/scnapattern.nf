@@ -64,7 +64,6 @@ workflow SCNAPATTERN {
     ch_input = Channel.fromSamplesheet("input").map {
         meta, filename, ->
                 [meta, filename]
-            }
     }
 
     CALCULATE_SCNAPATTERN(meta, filename)
