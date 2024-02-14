@@ -64,7 +64,7 @@ workflow SCNAPATTERN {
                 [meta, filename]
     }
 
-    CALCULATE_SCNAPATTERN(meta, filename)
+    CALCULATE_SCNAPATTERN(ch_input)
 
     CALCULATE_SCNAPATTERN.out.table
                          .collectFile(storeDir: "${params.outdir}/summary/",
