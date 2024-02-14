@@ -45,7 +45,7 @@ ch_multiqc_custom_methods_description = params.multiqc_methods_description ? fil
 //
 
 // include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
-include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
+// include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -59,8 +59,6 @@ def multiqc_report = []
 workflow SCNAPATTERN {
 
     ch_versions = Channel.empty()
-
-
     ch_input = Channel.fromSamplesheet("input").map {
         meta, filename, ->
                 [meta, filename]
@@ -69,10 +67,10 @@ workflow SCNAPATTERN {
     CALCULATE_SCNAPATTERN(meta, filename)
 
     CALCULATE_SCNAPATTERN.out.table
-                        .collectFile(storeDir: "${params.outdir}/summary/",
-                                     name: 'pattern_classification.seg',
-                                     keepHeader: true,
-                                     skip: 1)
+                         .collectFile(storeDir: "${params.outdir}/summary/",
+                                      name: 'pattern_classification.seg',
+                                      keepHeader: true,
+                                      skip: 1)
 
     ch_versions = ch_versions.mix(CALCULATE_SCNAPATTERN.out.versions)
 
