@@ -92,15 +92,15 @@ def harmonize_columns(
     match format:
         case "ascat":
             dataframe = dataframe.rename(
-                columns={"total_copy_number": "absolute_copy_number"}
+                columns={"total_copy_number": "absolute_cn"}
             )
         case "ace":
             dataframe = dataframe.rename(
-                columns={"copies": "absolute_copy_number"}
+                columns={"copies": "absolute_cn"}
             )
         case "ichorcna":
             dataframe = dataframe.rename(
-                columns={"copy.number": "absolute_copy_number",
+                columns={"copy.number": "absolute_cn",
                          "chr": "chromosome"}
             )
         case _:
