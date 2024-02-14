@@ -201,7 +201,7 @@ def main():
     parser.add_argument("--ploidy", type=int, help="Ploidy of the sample",
                         default=2)
     parser.add_argument("--genome", choices=("hg19", "hg38"), default="hg38")
-    parser.add_argument("--file-format", choices=("ascat_sc", "ichorcna",
+    parser.add_argument("--file-format", choices=("ascat", "ichorcna",
                                                   "ace"))
     parser.add_argument("--genome-style", choices=("ucsc", "ncbi"),
                         default="ucsc")
