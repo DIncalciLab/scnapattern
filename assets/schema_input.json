@@ -15,7 +15,7 @@
             },
             "filename": {
               "type": "string",
-              "pattern": "^\\S+\\.(txt|seg)$",
+              "pattern": "^\\S+\\.(txt|seg|csv|tsv)$",
               "format": "file-path",
               "errorMessage": "Filename must be provided, cannot contain spaces, and must end in either txt or seg"
             },
