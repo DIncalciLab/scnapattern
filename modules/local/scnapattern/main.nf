@@ -11,7 +11,7 @@ process CALCULATE_SCNAPATTERN {
     tuple val(meta), path(segmentfile)
 
     output:
-    tuple val(meta), path("*_classification.txt"), emit: classification_table
+    tuple val(meta), path("*_classification.txt"), emit: table
     path "versions.yml"                          , emit: versions
 
     when:
