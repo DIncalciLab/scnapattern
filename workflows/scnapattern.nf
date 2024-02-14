@@ -59,10 +59,10 @@ def multiqc_report = []
 workflow SCNAPATTERN {
 
     ch_versions = Channel.empty()
-    ch_input = Channel.fromSamplesheet("input").map {
-        meta, filename, ->
-                [meta, filename]
-    }
+    // ch_input = Channel.fromSamplesheet("input").map {
+    //     meta, filename, ->
+    //             [meta, filename]
+    // }
 
     // CALCULATE_SCNAPATTERN(meta, filename)
 
