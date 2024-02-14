@@ -253,6 +253,24 @@
                     "help_text": "Allows string values that are parseable as numbers or booleans. For further information see [JSONSchema docs](https://github.com/everit-org/json-schema#lenient-mode)."
                 }
             }
+        },
+        "pipeline_specific_options": {
+            "title": "Pipeline specific options",
+            "type": "object",
+            "description": "",
+            "default": "",
+            "fa_icon": "fas fa-filter",
+            "properties": {
+                "genome": {
+                    "type": "string",
+                    "default": "hg19"
+                },
+                "genomestyle": {
+                    "type": "string",
+                    "default": "ucsc",
+                    "enum": ["ucsc", "ncbi"]
+                }
+            }
         }
     },
     "allOf": [
@@ -270,16 +288,9 @@
         },
         {
             "$ref": "#/definitions/generic_options"
-        }
-    ],
-    "properties": {
-        "genome": {
-            "type": "string",
-            "default": "hg19"
         },
-        "genomestyle": {
-            "type": "string",
-            "default": "ucsc"
+        {
+            "$ref": "#/definitions/pipeline_specific_options"
         }
-    }
+    ]
 }
