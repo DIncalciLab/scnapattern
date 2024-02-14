@@ -13,18 +13,24 @@
                 "errorMessage": "Sample name must be provided and cannot contain spaces",
                 "meta": ["id"]
             },
+            "filename": {
+              "type": "string",
+              "pattern": "^\\S+\\.(txt|seg)$",
+              "format": "file-path",
+              "errorMessage": "Filename must be provided, cannot contain spaces, and must end in either txt or seg"
+            },
             "ploidy": {
                 "type": "integer",
                 "errorMessage": "Ploidy must be provided as an integer number",
                 "meta": ["ploidy"]
             },
-            "kind": {
+            "format": {
                 "type": "string",
-                "enum": ["ichorcna", "ascat"],
-                "errorMessage": "Ploidy must be provided as an integer number",
-                "meta": ["kind"]
+                "enum": ["ichorcna", "ascat", "ace"],
+                "errorMessage": "Format must be one of either ichorcna, ascat, or ace",
+                "meta": ["format"]
             }
         },
-        "required": ["sample", "ploidy", "kind"]
+        "required": ["sample", "ploidy", "format"]
     }
 }
