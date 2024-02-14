@@ -4,8 +4,6 @@ import argparse
 from pathlib import Path
 from typing import Literal
 
-from sympy import im
-
 import pandas as pd
 import janitor
 import pyranges as pr
@@ -207,6 +205,7 @@ def main():
                                                   "ace"))
     parser.add_argument("--genome-style", choices=("ucsc", "ncbi"),
                         default="ucsc")
+    parser.add_argument("--sample-name", default="Sample")
     parser.add_argument("source", help="Source segment file")
     parser.add_argument("destination", help="Destination to save to")
     parser.add_argument('--version', action='version',
@@ -214,7 +213,15 @@ def main():
 
     options = parser.parse_args()
 
-    source = pd.read_table(options.source).clean_names().astype(
+    source = pd.read_table(options.source).clean_names()
+
+    if options.sample:
+        source["sample"] = options.sample
+    # Fall back to integrated sample, except for ACE that doesn't have it
+    elif options.file_format == "ace":
+        source["sample"] = Path(options.source).stem
+
+    source = harmonize_columns(source, options.file_format).astype(
         {"chromosome": "str"}
     )
 
@@ -223,12 +230,6 @@ def main():
 
     if options.genome_style == "ncbi"and not source.chromosome.str.startswith("chr").any():
         source = ucsc_to_ncbi(source)
-
-    if options.file_format == "ace":
-        source["sample"] = Path(options.source).stem
-
-
-    source = harmonize_columns(source, options.file_format)
 
     source = source.assign(length=source.end.sub(source.start))
 
