@@ -257,18 +257,21 @@
         "pipeline_specific_options": {
             "title": "Pipeline specific options",
             "type": "object",
-            "description": "",
+            "description": "Options specific for the pipeline",
             "default": "",
             "fa_icon": "fas fa-filter",
             "properties": {
                 "genome": {
                     "type": "string",
-                    "default": "hg19"
+                    "default": "hg19",
+                    "description": "Genome to use (hg19 or hg38) to download the arm level data.",
+                    "enum": ["hg19", "hg38"]
                 },
                 "genomestyle": {
                     "type": "string",
                     "default": "ucsc",
-                    "enum": ["ucsc", "ncbi"]
+                    "enum": ["ucsc", "ncbi"],
+                    "description": "Style of the genome, either \"ucsc\" (chrX) or \"ncbi\" (X)."
                 }
             }
         }
