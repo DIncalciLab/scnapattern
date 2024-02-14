@@ -87,10 +87,10 @@ def adjust_call(value: int, ploidy: int) -> float:
 
 def harmonize_columns(
     dataframe: pd.DataFrame,
-        format: Literal['ascat_sc', 'ichorcna', 'ace']) -> pd.DataFrame:
+        format: Literal['ascat', 'ichorcna', 'ace']) -> pd.DataFrame:
 
     match format:
-        case "ascat_sc":
+        case "ascat":
             dataframe = dataframe.rename(
                 columns={"total_copy_number": "absolute_copy_number"}
             )
