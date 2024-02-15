@@ -3,12 +3,17 @@
 import argparse
 from pathlib import Path
 from typing import Literal
+import warnings
+
+warnings.simplefilter('ignore', category=DeprecationWarning)
 
 import pandas as pd
 import janitor
 import pyranges as pr
 
 __version__ = "0.0.1"
+
+
 
 # TODO: Standardize column names
 # TODO: In case of a segment spanning the arms, what to do? It can cause
