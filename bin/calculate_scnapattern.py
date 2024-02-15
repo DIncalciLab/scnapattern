@@ -6,6 +6,7 @@ from typing import Literal
 import warnings
 
 warnings.simplefilter('ignore', category=DeprecationWarning)
+warnings.simplefilter('ignore', category=FutureWarning)
 
 import pandas as pd
 import janitor
@@ -13,12 +14,6 @@ import pyranges as pr
 
 __version__ = "0.0.1"
 
-
-
-# TODO: Standardize column names
-# TODO: In case of a segment spanning the arms, what to do? It can cause
-# problems if the sum cn become more than 100% of the genome, perhaps
-# include the normalized length once or just do over the whole chromosome
 
 def get_chromosomal_arm_lengths(genome: str="hg38") -> pd.DataFrame:
 
