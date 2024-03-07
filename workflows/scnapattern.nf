@@ -66,7 +66,7 @@ workflow SCNAPATTERN {
 
     CALCULATE_SCNAPATTERN(ch_input)
 
-    CALCULATE_SCNAPATTERN.out.table
+    CALCULATE_SCNAPATTERN.out.table.map{ meta, filepath -> filepath }
                          .collectFile(storeDir: "${params.outdir}/summary/",
                                       name: 'pattern_classification.seg',
                                       keepHeader: true,
