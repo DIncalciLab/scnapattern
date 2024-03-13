@@ -15,12 +15,12 @@ import pyranges as pr
 __version__ = "0.0.1"
 
 
-def get_chromosomal_arm_lengths(genome: str="hg38") -> pd.DataFrame:
+def get_chromosomal_arm_lengths(genome: str = "hg38") -> pd.DataFrame:
 
     url = f"http://hgdownload.cse.ucsc.edu/goldenpath/{genome}/database/cytoBand.txt.gz"
     table = (
-        pd.read_table(url, names=["chrom","chromStart","chromEnd",
-                                  "arm","gieStain"] )
+        pd.read_table(url, names=["chrom", "chromStart", "chromEnd",
+                                  "arm"," gieStain"])
         .transform_column("arm", lambda x: x.str[0], elementwise=False)
         .dropna(subset=["arm"])
         .groupby(["chrom", "arm"], as_index=False )
