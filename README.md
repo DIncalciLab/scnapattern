@@ -7,7 +7,8 @@ This pipeline requires shallow whole-genome sequencing (sWGS) data with absolute
 The pipeline includes two steps:
 
 1. Calculate SCNA patterns for given inputs
-2. Generate a QC summary ([`MultiQC`](http://multiqc.info/))
+2. Output a table with patterns and parameters for each analyzed sample
+3. Generate a QC summary ([`MultiQC`](http://multiqc.info/))
 
 ## Usage
 
