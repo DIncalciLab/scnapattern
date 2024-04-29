@@ -3,7 +3,6 @@
 ## [Pattern calling algorithm](https://pubmed.ncbi.nlm.nih.gov/35714451/)
 
 > Pesenti C, Beltrame L, Velle A, Fruscio R, Jaconi M, Borella F, Cribiù FM, Calura E, Venturini LV, Lenoci D, Agostinis F, Katsaros D, Panini N, Bianchi T, Landoni F, Miozzo M, D'Incalci M, Brenton JD, Romualdi C, Marchini S. Copy number alterations in stage I epithelial ovarian cancer highlight three genomic patterns associated with prognosis. Eur J Cancer. 2022 Aug;171:85-95. doi: 10.1016/j.ejca.2022.05.005. PMID: 35714451.
-Format:
 
 ## [nf-core](https://pubmed.ncbi.nlm.nih.gov/32055031/)
 
