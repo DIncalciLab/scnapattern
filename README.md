@@ -20,10 +20,10 @@ First, prepare a samplesheet with your input data that looks as follows:
 
 ```csv
 sample,filename,ploidy,format
-Sample_1,AEG588A1_S1_L002_R1_001.cna.seg,2,ichorcna
+Sample_1,Sample1.cna.seg,2,ichorcna
 ```
 
-Each row represents a sample, the associated segment file, the ploidy of the sample, and the data format.
+Each row represents a sample name, the associated absolute path to the segment file, the ploidy of the sample, and the data format (either `ascat`, `ace`, or `ichorcna`).
 
 
 Now, you can run the pipeline using:
@@ -37,7 +37,7 @@ nextflow run dincalcilab/scnapattern \
    --genomestyle <GENOMESTYLE>
 ```
 
-Where `GENOME` is either `hg19` or `hg38` and `genomestyle` is either `ucsc` (`chr` prefix for chomosomes) or `ncbi` (no `chr` prefix).
+Where `GENOME` is either `hg19` or `hg38` and `genomestyle` is either `ucsc` (`chr` prefix for chomosomes) or `ncbi` (no `chr` prefix). Note that you **must** use a Nextflow configuration profile that supports Docker or Singularity images.
 
 > [!WARNING]
 > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_;
