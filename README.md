@@ -1,51 +1,43 @@
 ## Introduction
 
-**dincalcilab/scnapattern** is a bioinformatics pipeline that ...
+**dincalcilab/scnapattern** is a bioinformatics pipeline that assigns somatic copy number alterations (SCNA) patterns (S, stable; U, unstable; HU, highly unstable) as described in [Copy number alterations in stage I epithelial ovarian cancer highlight three genomic patterns associated with prognosis](https://doi.org/10.1016/j.ejca.2022.05.005) by Pesenti, Beltrame, *et al*.
 
-<!-- TODO nf-core:
-   Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
-   major pipeline sections and the types of output it produces. You're giving an overview to someone new
-   to nf-core here, in 15-20 seconds. For an example, see https://github.com/nf-core/rnaseq/blob/master/README.md#introduction
--->
+This pipeline requires shallow whole-genome sequencing (sWGS) data with absolute copy number and ploidy estimates. Currently segmentation outputs from ASCAT.sc, ACE, and ichorCNA are supported natively.
 
-<!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
-     workflows use the "tube map" design for that. See https://nf-co.re/docs/contributing/design_guidelines#examples for examples.   -->
-<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
+The pipeline includes two steps:
 
-1. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
-2. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+1. Calculate SCNA patterns for given inputs
+2. Generate a QC summary ([`MultiQC`](http://multiqc.info/))
 
 ## Usage
 
 > [!NOTE]
 > If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline) with `-profile test` before running the workflow on actual data.
 
-<!-- TODO nf-core: Describe the minimum required steps to execute the pipeline, e.g. how to prepare samplesheets.
-     Explain what rows and columns represent. For instance (please edit as appropriate):
-
 First, prepare a samplesheet with your input data that looks as follows:
 
 `samplesheet.csv`:
 
 ```csv
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
+sample,filename,ploidy,format
+Sample_1,AEG588A1_S1_L002_R1_001.cna.seg,2,ichorcna
 ```
 
-Each row represents a fastq file (single-end) or a pair of fastq files (paired end).
+Each row represents a sample, the associated segment file, the ploidy of the sample, and the data format.
 
--->
 
 Now, you can run the pipeline using:
-
-<!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
 
 ```bash
 nextflow run dincalcilab/scnapattern \
    -profile <docker/singularity/.../institute> \
    --input samplesheet.csv \
-   --outdir <OUTDIR>
+   --outdir <OUTDIR> \
+   --genome <GENOME> \
+   --genomestyle <GENOMESTYLE>
 ```
+
+Where `GENOME` is either `hg19` or `hg38` and `genomestyle` is either `ucsc` (`chr` prefix for chomosomes) or `ncbi` (no `chr` prefix).
 
 > [!WARNING]
 > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_;
@@ -53,11 +45,7 @@ nextflow run dincalcilab/scnapattern \
 
 ## Credits
 
-dincalcilab/scnapattern was originally written by lbeltrame.
-
-We thank the following people for their extensive assistance in the development of this pipeline:
-
-<!-- TODO nf-core: If applicable, make list of people who have also contributed -->
+dincalcilab/scnapattern was originally written by Luca Beltrame (@lbeltrame).
 
 ## Contributions and Support
 
@@ -65,10 +53,7 @@ If you would like to contribute to this pipeline, please see the [contributing g
 
 ## Citations
 
-<!-- TODO nf-core: Add citation for pipeline after first release. Uncomment lines below and update Zenodo doi and badge at the top of this file. -->
-<!-- If you use dincalcilab/scnapattern for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) -->
-
-<!-- TODO nf-core: Add bibliography of tools and data used in your pipeline -->
+If you use dincalcilab/scnapattern for your analysis, please cite it using the following doi: [10.1016/j.ejca.2022.05.005](https://doi.org/10.1016/j.ejca.2022.05.005)
 
 An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
 
