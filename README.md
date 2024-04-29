@@ -1,3 +1,5 @@
+# Somatic copy number alteration (SCNA) pattern identification in shallow whole-genome sequencing data
+
 ## Introduction
 
 **dincalcilab/scnapattern** is a bioinformatics pipeline that assigns somatic copy number alterations (SCNA) patterns (S, stable; U, unstable; HU, highly unstable) as described in [Copy number alterations in stage I epithelial ovarian cancer highlight three genomic patterns associated with prognosis](https://doi.org/10.1016/j.ejca.2022.05.005) by Pesenti, Beltrame, *et al*.
@@ -38,7 +40,7 @@ nextflow run dincalcilab/scnapattern \
    --genomestyle <GENOMESTYLE>
 ```
 
-Where `GENOME` is either `hg19` or `hg38` and `genomestyle` is either `ucsc` (`chr` prefix for chomosomes) or `ncbi` (no `chr` prefix). Note that you **must** use a Nextflow configuration profile that supports Docker or Singularity images.
+Where `GENOME` is either `hg19` or `hg38` and `genomestyle` is either `ucsc` (`chr` prefix for chomosomes) or `ncbi` (no `chr` prefix). Note that you **must** use a Nextflow configuration profile that supports Docker or Singularity images, as some tools are only provided by containers.
 
 > [!WARNING]
 > Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_;
