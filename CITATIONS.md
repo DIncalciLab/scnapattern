@@ -1,5 +1,10 @@
 # dincalcilab/scnapattern: Citations
 
+## [Pattern calling algorithm](https://pubmed.ncbi.nlm.nih.gov/35714451/)
+
+> Pesenti C, Beltrame L, Velle A, Fruscio R, Jaconi M, Borella F, Cribiù FM, Calura E, Venturini LV, Lenoci D, Agostinis F, Katsaros D, Panini N, Bianchi T, Landoni F, Miozzo M, D'Incalci M, Brenton JD, Romualdi C, Marchini S. Copy number alterations in stage I epithelial ovarian cancer highlight three genomic patterns associated with prognosis. Eur J Cancer. 2022 Aug;171:85-95. doi: 10.1016/j.ejca.2022.05.005. PMID: 35714451.
+Format:
+
 ## [nf-core](https://pubmed.ncbi.nlm.nih.gov/32055031/)
 
 > Ewels PA, Peltzer A, Fillinger S, Patel H, Alneberg J, Wilm A, Garcia MU, Di Tommaso P, Nahnsen S. The nf-core framework for community-curated bioinformatics pipelines. Nat Biotechnol. 2020 Mar;38(3):276-278. doi: 10.1038/s41587-020-0439-x. PubMed PMID: 32055031.
@@ -10,11 +15,7 @@
 
 ## Pipeline tools
 
-- [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
-
-  > Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].
-
-- [MultiQC](https://pubmed.ncbi.nlm.nih.gov/27312411/)
+-- [MultiQC](https://pubmed.ncbi.nlm.nih.gov/27312411/)
 
   > Ewels P, Magnusson M, Lundin S, Käller M. MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics. 2016 Oct 1;32(19):3047-8. doi: 10.1093/bioinformatics/btw354. Epub 2016 Jun 16. PubMed PMID: 27312411; PubMed Central PMCID: PMC5039924.
 
