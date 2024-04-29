@@ -2,9 +2,9 @@
 
 **dincalcilab/scnapattern** is a bioinformatics pipeline that assigns somatic copy number alterations (SCNA) patterns (S, stable; U, unstable; HU, highly unstable) as described in [Copy number alterations in stage I epithelial ovarian cancer highlight three genomic patterns associated with prognosis](https://doi.org/10.1016/j.ejca.2022.05.005) by Pesenti, Beltrame, *et al*.
 
-This pipeline requires shallow whole-genome sequencing (sWGS) data with absolute copy number and ploidy estimates. Currently segmentation outputs from ASCAT.sc, ACE, and ichorCNA are supported natively.
+This pipeline requires shallow whole-genome sequencing (sWGS) data with absolute copy number and ploidy estimates. Currently segmentation outputs from [ASCAT.sc](https://github.com/VanLoo-lab/ASCAT.sc), [ACE](https://www.bioconductor.org/packages/release/bioc/html/ACE.html), and [ichorCNA](https://github.com/GavinHaLab/ichorCNA/) are supported natively.
 
-The pipeline includes two steps:
+The pipeline includes these steps:
 
 1. Calculate SCNA patterns for given inputs
 2. Output a table with patterns and parameters for each analyzed sample
