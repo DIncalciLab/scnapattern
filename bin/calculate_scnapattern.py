@@ -110,6 +110,7 @@ def harmonize_columns(
 
 def normalized_scna_length(absolute_calls: pd.DataFrame,
                            arm_data: pd.DataFrame) -> pd.DataFrame:
+
     # Convert the dataframes to PyRanges objects
     calls_pr = pr.PyRanges(absolute_calls.rename(
         columns={"chromosome": "Chromosome", "start": "Start", "end": "End"}))
@@ -120,30 +121,38 @@ def normalized_scna_length(absolute_calls: pd.DataFrame,
     # Perform intersection
     intersected = calls_pr.join(arms_pr, how='left')
 
-    # Calculate total chromosome lengths from arm_data
-    chromosome_lengths = arm_data.groupby('Chromosome', as_index=False).agg(
-        TotalLength=('End', 'max'))
-    chromosome_lengths.rename(columns={'chrom': 'Chromosome'}, inplace=True)
-
-    # Calculate normalized length
+    # A segment may overlap the centromere, causing duplicated regions
+    # with both p and q arms
+    # Cope with this by aggregating and using the total length as
+    # a "fake arm length"
     intersected_df = intersected.df
-    intersected_df['new_start'] = intersected_df[['Start', 'Start_b']].max(
-        axis=1)
-    intersected_df['new_end'] = intersected_df[['End', 'End_b']].min(axis=1)
-    intersected_df['length'] = (intersected_df['new_end'] -
-                                intersected_df['new_start'])
-    intersected_df['normalized_length'] = intersected_df['length'] / intersected_df['ArmLength']
+    # Generate a unique ID for each segment
+    intersected_df = intersected_df.join_apply(
+        lambda x: f"{x.Chromosome}:{x.Start}-{x.End}_{x['sample']}",
+        "SegmentID")
+    duplicated_segments = intersected_df[
+        intersected_df.duplicated('SegmentID', keep=False)]
 
-    # Merge with chromosome lengths to get the total length for normalization
-    intersected_df = pd.merge(intersected_df, chromosome_lengths,
-                             on='Chromosome', how='left')
+    # Calculate total chromosome lengths from arm_data
+    chromosome_lengths = arm_data.groupby('Chromosome').agg({
+        'Start': 'min', 'End': 'max'}).reset_index()
+    chromosome_lengths['ChromosomeLength'] = chromosome_lengths['End'].sub(
+        chromosome_lengths['Start'])
+
+    # Get rid of the dups
+    aggregated = duplicated_segments.drop_duplicates(
+        subset=["SegmentID"]).assign(
+            Name="whole").drop("ArmLength", axis=1).rename(
+                columns={"ChromosomeLength": "ArmLength"})
+    non_duplicated_segments = intersected_df.drop_duplicates(
+        subset='SegmentID', keep=False)
+    intersected_df = pd.concat([non_duplicated_segments, aggregated])
 
     # Normalization: check if the segment spans both arms. If so,
     # normalize over the total chromosome length.
-    intersected_df['normalized_length'] = intersected_df.apply(
-        lambda x: x['length'] / x['TotalLength']
-       if (x['Start'] <= x['Start_b'] and x['End'] >= x['End_b'])
-       else x['length'] / x['ArmLength'], axis=1)
+
+    intersected_df["normalized_length"] = intersected_df["length"].div(
+        intersected_df["ArmLength"])
 
     # Clean up the DataFrame using pyjanitor to standardize column names
     cleaned_df = (
@@ -158,7 +167,7 @@ def normalized_scna_length(absolute_calls: pd.DataFrame,
 
 
 def call_patterns(segments: pd.DataFrame, arm_data: pd.DataFrame,
-                         ploidy: int):
+                  ploidy: int):
 
     segment_length = (
         normalized_scna_length(segments, arm_data)
@@ -170,7 +179,6 @@ def call_patterns(segments: pd.DataFrame, arm_data: pd.DataFrame,
         segment_length
         .assign(call=segment_length.apply(adjust_call, ploidy=ploidy, axis=1))
     )
-
 
     normalized_length = (
         segment_length
