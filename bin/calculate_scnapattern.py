@@ -100,7 +100,7 @@ def harmonize_columns(
             )
         case "ichorcna":
             dataframe = dataframe.rename(
-                columns={"copy.number": "absolute_cn",
+                columns={"copy_number": "absolute_cn",
                          "chr": "chromosome"}
             )
         case _:
