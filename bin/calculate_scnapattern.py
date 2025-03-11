@@ -101,7 +101,7 @@ def harmonize_columns(
         case "ichorcna":
             dataframe = dataframe.rename(
                 columns={"copy_number": "absolute_cn",
-                         "chr": "chromosome"}
+                         "chrom": "chromosome"}
             )
         case _:
             raise ValueError(f"Unsupported file format {format}")
